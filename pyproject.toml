@@ -1,0 +1,18 @@
+[project]
+name = "protoflow"
+version = "0.1.0"
+description = "An automation engine designed for building habits and changing your behaviors"
+dependencies = [
+    "colorama",
+    "send2trash",
+    "psutil",
+    "keyboard",
+    "notify-py",
+    "pywinctl"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+protoflow = "protoflow.cli:main"
