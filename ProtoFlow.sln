@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{3AF681AA-1E89-46C2-A036-29956368C8E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDK", "SDK\SDK.csproj", "{50628516-03AC-45D7-A27A-26710C4B904A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugins", "Plugins\Plugins.csproj", "{B2764D1F-907E-454C-B263-D7518277AA04}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3AF681AA-1E89-46C2-A036-29956368C8E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF681AA-1E89-46C2-A036-29956368C8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF681AA-1E89-46C2-A036-29956368C8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF681AA-1E89-46C2-A036-29956368C8E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50628516-03AC-45D7-A27A-26710C4B904A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50628516-03AC-45D7-A27A-26710C4B904A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50628516-03AC-45D7-A27A-26710C4B904A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50628516-03AC-45D7-A27A-26710C4B904A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2764D1F-907E-454C-B263-D7518277AA04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2764D1F-907E-454C-B263-D7518277AA04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2764D1F-907E-454C-B263-D7518277AA04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2764D1F-907E-454C-B263-D7518277AA04}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

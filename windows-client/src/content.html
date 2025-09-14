@@ -1,0 +1,30 @@
+<div class="col py-3 d-flex justify-content-center" style="max-height: 100dvh; overflow-y: auto;">
+    <div class="container-fluid d-none" style="max-width: 800px; margin-bottom: 500px;" id="instance-ui">
+        <div class="d-flex align-items-center">
+            <h1 id="instance-ui-title">Instance title</h1>
+            <button class="btn btn-danger h-75" style="margin-left: auto;" data-bs-toggle="modal" data-bs-target="#exampleModal" id="close-button">Close</button>
+        </div>
+        <p id="instance-ui-name">Instance name</p>
+        <hr/>
+        <div id="instance-ui-container"></div>
+        <p class="d-block" style="min-height: 100px; width: 100%;"></p>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Close protocol</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to close this protocol?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="confirm-close-button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
