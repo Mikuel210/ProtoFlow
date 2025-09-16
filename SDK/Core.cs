@@ -31,7 +31,15 @@ public static class Core {
 	
 	public static void LoadPlugins() {
 		var relativePath = "../../../../Plugins/bin";
-		var pluginsDirectory = Path.GetFullPath(Path.Join(Environment.CurrentDirectory, relativePath));
+		string executablePath = Assembly.GetExecutingAssembly().Location;
+		string serverDirectory = Path.GetDirectoryName(executablePath)!;
+		var pluginsDirectory = Path.GetFullPath(Path.Join(serverDirectory, relativePath));
+
+		if (!Path.Exists(pluginsDirectory)) {
+			// Running published
+			pluginsDirectory = Path.Combine(AppContext.BaseDirectory, "Plugins/bin");
+			pluginsDirectory = Path.GetFullPath(pluginsDirectory);
+		}
         
 		var path = Directory
 			.EnumerateFiles(pluginsDirectory, "Plugins.dll", SearchOption.AllDirectories)
@@ -64,7 +72,13 @@ public static class Core {
 		}
 		
 		foreach (Instance instance in new List<Instance>(OpenInstances))
-			if (OpenInstances.Contains(instance)) instance.Loop();
+			if (OpenInstances.Contains(instance)) {
+				try { instance.Loop(); }
+				catch (Exception e) {
+					var instanceName = GetInstanceName(instance);
+					ConsoleUtilities.Error($"An exception was thrown during the loop of a {instanceName}: {e}");
+				}
+			}
 	}
 
 	private static void OnOpenInstancesUpdated() {
@@ -82,7 +96,7 @@ public static class Core {
 		
 		foreach (dynamic instanceData in data) {
 			try { DeserializeInstance(instanceData); }
-			catch (Exception e) { ConsoleUtilities.Warning($"Failed to deserialize instance: {e}"); }
+			catch (Exception e) { ConsoleUtilities.Error($"Failed to deserialize instance: {e}"); }
 		}
 	}
 
@@ -103,7 +117,7 @@ public static class Core {
 					var element = DeserializeUIElement(elementData);
 					instance.InstanceUI.Add(element);
 				}
-				catch (Exception e) { ConsoleUtilities.Warning($"Failed to deserialize UI element: {e}"); }
+				catch (Exception e) { ConsoleUtilities.Error($"Failed to deserialize UI element: {e}"); }
 			}
 		}
 		
@@ -113,19 +127,33 @@ public static class Core {
 	}
 
 	private static void DeserializeInstanceStorage(Instance instance, dynamic instanceData) {
-		var fields = instance.GetType()
-			.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+		var members = instance.GetType()
+			.GetMembers(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+			.Where(e => e.MemberType is MemberTypes.Field or MemberTypes.Property);
 		
-		foreach (var field in fields) {
-			var attribute = field.GetCustomAttribute<InstanceStorageAttribute>();
+		foreach (var member in members) {
+			var attribute = member.GetCustomAttribute<InstanceStorageAttribute>();
 			if (attribute is null) continue;
 
 			var dictionary = (Dictionary<string, object>)instanceData["InstanceStorage"];
 
-			if (dictionary.TryGetValue(field.Name, out _)) {
-				var json = JsonSerializer.Serialize(dictionary[field.Name]);
-				var value = JsonSerializer.Deserialize(json, field.FieldType, Serializer.SerializationOptions);
-				field.SetValue(instance, value);
+			if (dictionary.TryGetValue(member.Name, out _)) {
+				var json = JsonSerializer.Serialize(dictionary[member.Name]);
+
+				switch (member) {
+					case FieldInfo field:
+						var fieldValue = JsonSerializer.Deserialize(json, field.FieldType, Serializer.SerializationOptions);
+						field.SetValue(instance, fieldValue);
+
+						break;
+
+					case PropertyInfo property:
+						var propertyValue = JsonSerializer.Deserialize(json, property.PropertyType, Serializer.SerializationOptions);
+						if (property.CanWrite) property.SetValue(instance, propertyValue);
+						else ConsoleUtilities.Warning($"InstanceStorage property must have a public setter: {property.Name} in {property.DeclaringType}");
+
+						break;
+				}
 			}
 		}
 	}
@@ -150,7 +178,7 @@ public static class Core {
 
 		foreach (KeyValuePair<string, object> keyValuePair in elementData["Properties"]) {
 			try { DeserializeProperty(element, keyValuePair); }
-			catch (Exception e) { ConsoleUtilities.Warning($"Failed to deserialize UI element property: {e}"); }
+			catch (Exception e) { ConsoleUtilities.Error($"Failed to deserialize UI element property: {e}"); }
 		}
 
 		return element;
@@ -200,14 +228,18 @@ public static class Core {
 	private static Dictionary<string, object> GetInstanceStorage(Instance instance ) {
 		Dictionary<string, object> output = new();
 		
-		var fields = instance.GetType()
-			.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+		var members = instance.GetType()
+			.GetMembers(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+			.Where(e => e.MemberType == MemberTypes.Field || e.MemberType == MemberTypes.Property);
 		
-		foreach (var field in fields) {
-			var attribute = field.GetCustomAttribute<InstanceStorageAttribute>();
+		foreach (var member in members) {
+			var attribute = member.GetCustomAttribute<InstanceStorageAttribute>();
 			if (attribute is null) continue;
-			
-			output.Add(field.Name, field.GetValue(instance)!);
+
+			switch (member) {
+				case FieldInfo field: output.Add(field.Name, field.GetValue(instance)!); break;
+				case PropertyInfo property: output.Add(property.Name, property.GetValue(instance)!); break;
+			}
 		}
 
 		return output;
@@ -232,7 +264,9 @@ public static class Core {
 		}
 		
 		// Open instance
-		instance.Open();
+		try { instance.Open(); }
+		catch (Exception e) { ConsoleUtilities.Error($"An exception was thrown when opening a {instanceName}: {e}"); }
+		
 		OnInstanceOpened?.Invoke(instance.GetType());
 		OnOpenInstancesUpdated();
 		
@@ -308,7 +342,12 @@ public static class Core {
 		protocol.InstanceAudio.Audios.ForEach(e => e.Stop());
 		
 		// Close protocol
-		protocol.Close();
+		try { protocol.Close(); }
+		catch (Exception e) {
+			var protocolName = GetInstanceName(protocol);
+			ConsoleUtilities.Error($"An exception was thrown when closing a {protocolName}: {e}");
+		}
+		
 		OpenInstances.Remove(instance);
 		OnInstanceClosed?.Invoke(protocol.GetType());
 		OnOpenInstancesUpdated();

@@ -130,3 +130,23 @@ public delegate void ClickEventHandler();
 	public Button(string text = "") => Text = text;
 
 }
+
+public delegate void CheckedEventHandler();
+public delegate void UncheckedEventHandler();
+public delegate void StateChangedEventHandler(bool state);
+[Serializable] public class Checkbox : UIElement {
+
+	public string Text { get; set; }
+	public bool Checked { get; set; }
+	
+	public event CheckedEventHandler OnChecked;
+	public event UncheckedEventHandler OnUnchecked;
+	public event StateChangedEventHandler OnStateChanged;
+
+	public Checkbox(string text = "") {
+		Text = text;
+
+		OnStateChanged += state => Checked = state;
+	}
+
+}

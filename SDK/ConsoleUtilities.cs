@@ -2,7 +2,7 @@ namespace SDK;
 
 public static class ConsoleUtilities {
 
-	private const bool DEBUG = true; 
+	private const bool DEBUG = false; 
 
 	public static void WriteTitledMessage(string title, string message, ConsoleColor backgroundColor,
 		ConsoleColor foregroundColor = ConsoleColor.Black) {

@@ -3,7 +3,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('bridge', {
     openProtocol: () => ipcRenderer.invoke('OpenProtocol'),
     pingGetUIElements: (instanceId) => ipcRenderer.invoke('PingGetUIElements', instanceId),
-    pingUIEvent: (elementID, eventName, arguments) => ipcRenderer.invoke('PingUIEvent', elementID, eventName, arguments),
+    pingUIEvent: (elementID, eventName, args) => ipcRenderer.invoke('PingUIEvent', elementID, eventName, args),
     pingGetOpenableProtocols: () => ipcRenderer.invoke('PingGetOpenableProtocols'),
     pingOpenProtocol: (typeName) => ipcRenderer.invoke('PingOpenProtocol', typeName),
     pingCloseProtocol: (instanceID) => ipcRenderer.invoke('PingCloseProtocol', instanceID),

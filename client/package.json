@@ -1,7 +1,7 @@
 {
-  "name": "windows-client",
+  "name": "protoflow-client",
   "version": "0.0.1",
-  "description": "A Windows client for interacting with a ProtoFlow server",
+  "description": "A client for interacting with a ProtoFlow server",
   "main": "main.js",
   "scripts": {
     "start": "statify compile && electron .",

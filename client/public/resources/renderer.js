@@ -125,13 +125,46 @@ bridge.onPongGetUIElements((event, elements) => {
 
             case "Button": 
                 elementName = 'button'; 
-                className = 'btn btn-primary mb-2 d-block w-100'
+                className = 'btn btn-primary mt-1 mb-1 d-block w-100'
                 break;
 
             case "Input": 
                 elementName = 'input';
                 className = 'form-control mb-2'
                 break;
+
+            case "Checkbox":
+                let div = document.createElement('div');
+                let input = document.createElement('input');
+                let label = document.createElement('label');
+
+                div.classList = 'form-check';
+                div.id = element.ElementID;
+
+                input.classList = 'form-check-input';
+                input.type = 'checkbox';
+                input.id = 'input-' + element.ElementID;
+
+                label.classList = 'form-check-label'
+                label.setAttribute("for", input.id);
+
+                instanceUIContainer.append(div);
+                div.appendChild(input);
+                div.appendChild(label);
+
+                updateElementProperties(div, element.Type, properties)
+
+                input.addEventListener('change', (event) => {
+                    let state = event.currentTarget.checked
+                    bridge.pingUIEvent(element.ElementID, 'StateChanged', { state: state });
+
+                    if (state)
+                        bridge.pingUIEvent(element.ElementID, 'Checked', { });
+                    else
+                        bridge.pingUIEvent(element.ElementID, 'Unchecked', { });
+                })
+
+                return;
         }
             
         let elementInstance = document.createElement(elementName);
@@ -174,6 +207,7 @@ bridge.onPongUpdateUIElement((event, elementID, propertyJson) => {
     if (tagName == 'hr') type = "HorizontalRule";
     if (tagName == 'button') type = "Button";
     if (tagName == 'input') type = "Input";
+    if (tagName == 'div') type = "Checkbox";
 
     updateElementProperties(elementInstance, type, property);
 })
@@ -191,6 +225,18 @@ function updateElementProperties(elementInstance, type, properties)
             if ("Type" in properties) elementInstance.type = properties.Type.toLowerCase();
             if ("Text" in properties) elementInstance.value = properties.Text;
             if ("Placeholder" in properties) elementInstance.placeholder = properties.Placeholder;
+            break;
+
+        case "Checkbox":
+            if ("Text" in properties) elementInstance.querySelector('label').innerHTML = properties.Text;
+
+            if ("Checked" in properties) {
+                if (properties["Checked"])
+                    elementInstance.querySelector('input').setAttribute("checked", "");
+                else
+                    elementInstance.querySelector('input').removeAttribute("checked");
+            }
+
             break;
     }
 }

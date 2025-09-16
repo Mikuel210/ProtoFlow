@@ -30,10 +30,19 @@ let ws;
 
 function connect() {
   ws = new WebSocket('http://127.0.0.1:9006');
-
+  let platformCodename = process.platform;
+  
   ws.on('error', console.error);
-  ws.on('open', () => sendCommand("Connect", { Platform: "Windows" }));
   ws.on('message', handleMessage);
+
+  ws.on('open', () => {
+    if (platformCodename == "win32")
+      sendCommand("Connect", { Platform: "Windows" })
+    else if (platformCodename == "darwin")
+      sendCommand("Connect", { Platform: "MacOS" })
+    else
+      sendCommand("Connect", { Platform: "Linux" })
+  });
 }
 
 function sendCommand(command, args) {

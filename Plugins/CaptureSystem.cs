@@ -3,46 +3,57 @@ using SDK.InstanceTools;
 
 namespace Plugins;
 
-public class CaptureSystem : SystemInstance {
-	
-	// Private fields
-	[InstanceStorage] private List<string> _captureList = new();
-	private List<UIElement> _captureElements = new();
-	
-	public override void Open() {
-		InstanceUI.Add(new Heading("Capture List", 2));
-		Update();
-	}
+[InstanceDescription("A system for turning ideas into stuff")]
+public class CaptureSystem : SystemInstance
+{
+    [InstanceStorage] public List<string> CaptureList { get; set; } = new();
+    
+    // UI
+    private Input _captureInput;
+    private Button _captureButton;
+    private List<UIElement> _listElements = new();
 
-	public void Capture(string text) {
-		_captureList.Add(text);
-		Update();
-	}
+    public override void Open()
+    {
+        _captureInput = new(placeholder: "Your thoughts go here...");
+        InstanceUI.Add(_captureInput);
 
-	private void Update() {
-		foreach (UIElement element in _captureElements)
-			InstanceUI.Remove(element);
-		
-		_captureElements.Clear();
+        _captureButton = new("Capture");
+        InstanceUI.Add(_captureButton);
 
-		foreach (string text in _captureList) {
-			Heading heading = new Heading(text, 4);
-			_captureElements.Add(heading);
-			InstanceUI.Add(heading);
+        _captureButton.OnClick += () =>
+        {
+            CaptureList.Add(_captureInput.Text);
+            UpdateList();
+        };
 
-			Button deleteButton = new Button("Delete");
-			_captureElements.Add(deleteButton);
-			InstanceUI.Add(deleteButton);
+        InstanceUI.Add(new HorizontalRule());
+    }
 
-			deleteButton.OnClick += () => {
-				_captureList.Remove(text);
-				Update();
-			};
+    private void UpdateList()
+    {
+        _listElements.ForEach(e => InstanceUI.Remove(e));
+        _listElements.Clear();
+        
+        foreach (string capture in CaptureList)
+        {
+            var paragraph = new Paragraph(capture);
+            _listElements.Add(paragraph);
+            InstanceUI.Add(paragraph);
 
-			HorizontalRule horizontalRule = new();
-			_captureElements.Add(horizontalRule);
-			InstanceUI.Add(horizontalRule);
-		}
-	}
+            var deleteButton = new Button("Done");
+            _listElements.Add(deleteButton);
+            InstanceUI.Add(deleteButton);
 
+            deleteButton.OnClick += () =>
+            {
+                CaptureList.Remove(capture);
+                UpdateList();
+            };
+
+            var horizontalRule = new HorizontalRule();
+            _listElements.Add(horizontalRule);
+            InstanceUI.Add(horizontalRule);
+        }
+    }
 }

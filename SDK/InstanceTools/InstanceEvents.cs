@@ -67,7 +67,8 @@ public static class InstanceEvents {
 
 				return isTime && isDay;
 			},
-			Callback = callback
+			Callback = callback,
+			LastEvent = DateTime.Now.TimeOfDay <= time ? new() : DateTime.Now
 		};
 		
 		Events.Add(output);
@@ -99,7 +100,7 @@ public static class InstanceEvents {
 			throw new ArgumentException("Attempted to register an Instance Opened Event from a non-instance type");
 		
 		Event output = new() {
-			Callback = callback
+			Callback = callback,
 		};
 
 		Core.OnInstanceOpened += type => {
