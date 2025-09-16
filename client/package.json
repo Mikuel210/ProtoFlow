@@ -10,9 +10,32 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^37.3.1"
+    "electron": "^37.3.1",
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
     "ws": "^8.18.3"
+  },
+  "build": {
+    "appId": "com.protoflow-client",
+    "productName": "ProtoFlow",
+    "files": [
+      "main.js",
+      "preload.js",
+      "public/*",
+      "public/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   }
 }

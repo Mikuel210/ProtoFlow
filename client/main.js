@@ -18,7 +18,7 @@ const createWindow = () => {
 	  }
   })
 
-  // window.setMenu(null)
+  window.setMenu(null)
   window.loadFile('public/index.html')
 }
 
