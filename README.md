@@ -102,7 +102,7 @@ This is the system I use to keep my digital life organized. The following exampl
 
 #### For Windows
 
-- Download and unzip the client from the [releases tab](https://github.com/Mikuel210/ProtoFlow/releases/latest)
+- Download and run the installer from the [releases tab](https://github.com/Mikuel210/ProtoFlow/releases/latest)
 
 #### For Linux
 
@@ -145,7 +145,7 @@ This is the system I use to keep my digital life organized. The following exampl
 #### 2. Run the client
 
 - **For Windows**
-	- Run `ProtoFlow.exe`
+	- Run the client from the start menu or the desktop icon
 
 - **For Linux**
 	- Run `./protoflow-client`
