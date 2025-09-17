@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "Plugins/1.0.0": {
+        "dependencies": {
+          "SDK": "1.0.0"
+        },
+        "runtime": {
+          "Plugins.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.3": {},
+      "PropertyChanged.Fody/4.1.0": {},
+      "WatsonWebsocket/4.1.5": {}
+    }
+  },
+  "libraries": {
+    "Plugins/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
+    },
+    "PropertyChanged.Fody/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6v+f9cI8YjnZH2WBHuOqWEAo8DFFNGFIdU8xD3AsL6fhV6Y8oAmVWd7XKk49t8DpeUBwhR/X+97+6Epvek0Y3A==",
+      "path": "propertychanged.fody/4.1.0",
+      "hashPath": "propertychanged.fody.4.1.0.nupkg.sha512"
+    },
+    "WatsonWebsocket/4.1.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Wcij3cRZC/4rQDdXoB4ROmPdZ5ffra8xdfaKoDeRy0YL8qq1dteyyHIXAk9qPHBVLhq0AriKoFTMn+d24uLm9Q==",
+      "path": "watsonwebsocket/4.1.5",
+      "hashPath": "watsonwebsocket.4.1.5.nupkg.sha512"
+    }
+  }
+}
