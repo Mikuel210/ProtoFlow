@@ -80,7 +80,7 @@ This is the system I use to keep my digital life organized. The following exampl
 
 #### Method 1: For testing (example protocols and systems)
 
-- Download the server for your OS from the [releases tab](TODO)
+- Download the server for your OS from the [releases tab](https://github.com/Mikuel210/ProtoFlow/releases/latest)
 
 - On macOS and Linux, give the server execute permissions:
 
@@ -102,11 +102,11 @@ This is the system I use to keep my digital life organized. The following exampl
 
 #### For Windows
 
-- Download and run the installer from the [releases tab](TODO)
+- Download and run the installer from the [releases tab](https://github.com/Mikuel210/ProtoFlow/releases/latest)
 
 #### For Linux
 
-- Download the client from the [releases tab](TODO)
+- Download the client from the [releases tab](https://github.com/Mikuel210/ProtoFlow/releases/latest)
 - Give the client execute permissions
 
 	```bash
