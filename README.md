@@ -140,7 +140,7 @@ This is the system I use to keep my digital life organized. The following exampl
 	- On macOS and Linux, run `./Server`
 
 - **For method 2**
-	- Run `dotnet run` on the Server directory
+	- Run `dotnet run` on the `Server` directory
 
 #### 2. Run the client
 

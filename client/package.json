@@ -4,7 +4,7 @@
   "description": "A client for interacting with a ProtoFlow server",
   "main": "main.js",
   "scripts": {
-    "start": "statify compile && electron .",
+    "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
