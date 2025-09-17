@@ -80,7 +80,7 @@ This is the system I use to keep my digital life organized. The following exampl
 
 #### Method 1: For testing (example protocols and systems)
 
-- Download the server for your OS from the [releases tab](https://github.com/Mikuel210/ProtoFlow/releases/latest)
+- Download and unzip the server for your OS from the [releases tab](https://github.com/Mikuel210/ProtoFlow/releases/latest)
 
 - On macOS and Linux, give the server execute permissions:
 
@@ -102,11 +102,11 @@ This is the system I use to keep my digital life organized. The following exampl
 
 #### For Windows
 
-- Download and run the installer from the [releases tab](https://github.com/Mikuel210/ProtoFlow/releases/latest)
+- Download and unzip the client from the [releases tab](https://github.com/Mikuel210/ProtoFlow/releases/latest)
 
 #### For Linux
 
-- Download the client from the [releases tab](https://github.com/Mikuel210/ProtoFlow/releases/latest)
+- Download and unzip the client from the [releases tab](https://github.com/Mikuel210/ProtoFlow/releases/latest)
 - Give the client execute permissions
 
 	```bash
@@ -136,7 +136,7 @@ This is the system I use to keep my digital life organized. The following exampl
 #### 1. Run the server
 
 - **For method 1**
-	- On Windows, run the `.exe` file
+	- On Windows, run `Server.exe`
 	- On macOS and Linux, run `./Server`
 
 - **For method 2**
@@ -145,7 +145,7 @@ This is the system I use to keep my digital life organized. The following exampl
 #### 2. Run the client
 
 - **For Windows**
-	- Run the client from the desktop icon or start menu shortcut
+	- Run `ProtoFlow.exe`
 
 - **For Linux**
 	- Run `./protoflow-client`
