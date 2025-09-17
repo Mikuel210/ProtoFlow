@@ -4,6 +4,8 @@
 
 ProtoFlow organizes different aspects of your life into a single system tailored to your needs.
 
+![Screenshot](images/Screenshot.png)
+
 ## Navigation
 - [The problem](#the-problem)
 - [The solution](#the-solution)
@@ -14,7 +16,7 @@ ProtoFlow organizes different aspects of your life into a single system tailored
 	- [Focus Protocol](#focus-protocol)
 	- [Task System](#task-system)
 	- [Calendar System](#calendar-system)
-	- [Project System](#project-system)
+	- [Project Manager](#project-system)
 	- [Capture System](#capture-system)
 - [Getting started](#getting-started)
 - [Roadmap](#roadmap)
@@ -41,12 +43,7 @@ ProtoFlow provides you with the tools you need to create your own systems and pr
 
 - An architecture in which a server manages systems and protocols and clients interact with it
 - A cross-platform app for clients to interact with their systems and protocols
-	- An interface that allows you to open systems and protocols, to close protocol instances and to open new ones
-	- An interface for each system and protocol instance in which they define UI elements for users to interact with them
 - A C# DSL for creating your own systems and protocols
-	- A UI framework to interact with the client app
-	- A framework to interact with clients and perform native actions
-	- A framework for data serialization
 
 ## Examples
 
@@ -67,7 +64,7 @@ This is the system I use to keep my digital life organized. The following exampl
 - **The problem:** I need a way to manage my time that integrates with other systems.
 - **The solution:** A system that allows me to define time blocks for working on projects.
 
-### Project System
+### Project Manager
 
 - **The problem:** I need a structure that allows me to spend my time working on projects that matter to me.
 - **The solution:** A system in which I can define project ideas and projects that I'm working on. The system integrates with the Calendar System to allow me to define time blocks for my projects. The system opens focus protocols automatically when time blocks start.
@@ -75,13 +72,13 @@ This is the system I use to keep my digital life organized. The following exampl
 ### Capture System
 
 - **The problem:** My ideas often get lost or scattered across many places.
-- **The solution:** A centralized system that holds all my ideas, and a protocol that allows me to add new ones. The system allows me to manage all of my ideas, and in the future it could automatically route them to other systems using AI (e.g. "I have to do my Chemistry homework" is routed into the Task System, "I want to build a rocket" is routed to the Project System as a project idea)
+- **The solution:** A centralized system that holds all my ideas and allows me to capture new ones. The system allows me to manage all of my ideas, and in the future it could automatically route them to other systems using AI (e.g. "I have to do my homework" is routed into the Task System, "I want to build a rocket" is routed to the Project Manager as a project idea)
 
 ## Getting started
 
-### 1. Installing the server
+### STEP 1 - Installing the server
 
-#### Method 1 - For testing purposes (example protocols and systems)
+#### Method 1: For testing (example protocols and systems)
 
 - Download the server for your OS from the [releases tab](TODO)
 
@@ -91,7 +88,7 @@ This is the system I use to keep my digital life organized. The following exampl
 	chmod +x Server
 	```
 
-#### Method 2 - For development (make your own protocols and systems)
+#### Method 2: For development (make your own protocols and systems)
 
 - Install the [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download/visual-studio-sdks) (or greater)
 
@@ -101,42 +98,95 @@ This is the system I use to keep my digital life organized. The following exampl
 	git clone https://github.com/Mikuel210/ProtoFlow.git
 	```
 
-### 2. Installing the client
+### STEP 2 - Installing the client
 
-TODO
+#### For Windows
 
-### Usage
+- Download and run the installer from the [releases tab](TODO)
+
+#### For Linux
+
+- Download the client from the [releases tab](TODO)
+- Give the client execute permissions
+
+	```bash
+	chmod +x protoflow-client
+	```
+
+#### For macOS and others
+
+- Install [Node.js LTS](https://nodejs.org/en/download)
+
+- Clone the repository
+
+	```bash
+	git clone https://github.com/Mikuel210/ProtoFlow.git
+	```
+
+- Install the required packages
+
+	On the `client` directory:
+
+	```bash
+	npm install
+	```
+
+### USAGE
 
 #### 1. Run the server
 
 - **For method 1**
-	- On Windows, run the .exe file
+	- On Windows, run the `.exe` file
 	- On macOS and Linux, run `./Server`
 
 - **For method 2**
 	- Run `dotnet run` on the Server directory
 
-> NOTE: You must run the server on the same computer as the client as of now
-
 #### 2. Run the client
 
-TODO
+- **For Windows**
+	- Run the client from the desktop icon or start menu shortcut
+
+- **For Linux**
+	- Run `./protoflow-client`
+
+- **For macOS and others**
+	- Run `npm start` on the `client` directory
+
+**Notes**
+
+- Always start the client while the server is running
+- Restarting the server will require restarting the client as well
+- As of now, you must run the client on the same computer as the server
 
 ### Next steps
 
-- [Guide](TODO)
-- [Documentation](TODO)
+#### How to use the example protocols and systems
+
+- **Capture System:** Write down ideas, notes, or thoughts. Tick them off once processed.
+- **Project Manager:** Organize your work by logging project ideas and choosing a main and secondary project. Projects can connect with your tasks and time blocks.
+- **Task System:** Create tasks with a do date (when you want to work on them) and an optional due date. Tasks can be linked to projects.
+- **Focus Protocol:** Pick a task and run a timed focus session. You can also play music while you work.
+- **Calendar System:** Plan your week by creating recurring time blocks. If a block is linked to a project, it will automatically open a Focus Protocol when the time comes for you to work on it.
+
+#### How to develop your own protocols and systems
+
+See the [ProtoFlow Guide](documentation/GUIDE.md)
 
 ## Roadmap
 
 - [ ] Client rewrite
-	- [ ] Background support
+	- [ ] Support for running on background
 	- [ ] Mobile support
 - [ ] Remote server support
 - [ ] UI system overhaul
 	- [ ] More elements
 	- [ ] Hierarchy system
 	- [ ] XML support
-- [ ] AI framework
 - [ ] File system API
+- [ ] AI framework
 - [ ] Screentime API
+
+---
+
+Made with ❤️ for Clutter thanks to Hack Club

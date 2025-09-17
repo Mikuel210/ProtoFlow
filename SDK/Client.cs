@@ -161,11 +161,11 @@ public class Client(Client.PlatformType platform, string ipPort) {
 		});
 	}
 
-	public void PongOpenProtocol(string instanceId) {
+	public void PongOpenProtocol(string instanceID) {
 		Server.SendCommand(this, new() {
 			command = Server.Command.CommandType.PongOpenProtocol,
 			arguments = new() {
-				{ "InstanceID", instanceId }
+				{ "InstanceID", instanceID }
 			}
 		});
 	}
