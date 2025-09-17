@@ -97,6 +97,7 @@ This is the system I use to keep my digital life organized. The following exampl
 	```bash
 	git clone https://github.com/Mikuel210/ProtoFlow.git
 	```
+---
 
 ### STEP 2 - Installing the client
 
@@ -130,6 +131,7 @@ This is the system I use to keep my digital life organized. The following exampl
 	```bash
 	npm install
 	```
+---
 
 ### USAGE
 
