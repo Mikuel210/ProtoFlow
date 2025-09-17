@@ -161,6 +161,8 @@ This is the system I use to keep my digital life organized. The following exampl
 - Restarting the server will require restarting the client as well
 - As of now, you must run the client on the same computer as the server
 
+---
+
 ### Next steps
 
 #### How to use the example protocols and systems
