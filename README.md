@@ -145,7 +145,7 @@ This is the system I use to keep my digital life organized. The following exampl
 #### 2. Run the client
 
 - **For Windows**
-	- Run the client from the start menu or the desktop icon
+	- Run the client from the start menu shortcut or the desktop icon
 
 - **For Linux**
 	- Run `./protoflow-client`
