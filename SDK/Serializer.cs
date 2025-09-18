@@ -21,17 +21,15 @@ public static class Serializer {
 
 	public static T? Load<T>(string key) {
 		string path = Path.Join(DataFolder, $"{key}.json");
-		string json = File.ReadAllText(path);
-
+		
 		try {
+            string json = File.ReadAllText(path);
 			object? data = JsonSerializer.Deserialize<JsonElement>(json, SerializationOptions).GetValue();
 
 			if (data is T output) return output;
 			if (data is null) return default;
 		}
-		catch (JsonException) {
-			return default;
-		}
+		catch { return default; }
 		
 		throw new InvalidOperationException("Data couldn't be casted to the specified type");
 	}
